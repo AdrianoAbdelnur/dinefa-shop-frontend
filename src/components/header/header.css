@@ -1,7 +1,37 @@
 .header_container {
-    height: 3rem;
-    background-color: red;
+    height: 7rem;
+    background-color: var(--dinefa-white);
     display: flex;
-    justify-content: space-between;
+    width: 100%;
     align-items: center;
+}
+
+.logo {
+    height: 100px;
+    width: 150px;
+    margin: 5rem;
+}
+
+.navbar_options {
+    width: 40rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin: 0 0 .5rem 0;
+    font: 16px;
+
+}
+
+.navbar_options a {
+    text-decoration: none;
+    padding: 10px 15px;
+
+}
+
+.navbar_options a:hover {
+    background-color: var(--dinefa-orange);
+    border-radius: 15px;
+    transition: 1s;
+
 }

@@ -1,4 +1,16 @@
 .home_container {
+    background-color: #ebebf8;
+    display: flex;
     flex: 1;
-    background-color: blue;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    flex-direction: row;
+    width: 100%;
+}
+
+.products{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
