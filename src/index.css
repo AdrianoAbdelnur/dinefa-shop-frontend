@@ -1,3 +1,19 @@
+:root {
+  --dinefa-darkBlue: #010b82;
+  --dinefa-ligthBlue: #086ffd;
+  --dinefa-white: #ebebf8;
+  --dinefa-orange: #f5bf4b;
+  --dinefa-pink: #f843db; 
+}
+
+@font-face {
+  font-family: 'Libre-Frankin';
+  src: 
+      local('Libre-Frankin'), 
+      url('./assets/fonts/LibreFranklin-VariableFont_wght.ttf') format('opentype');
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

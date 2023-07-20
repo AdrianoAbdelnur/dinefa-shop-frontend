@@ -1,0 +1,16 @@
+.productCard {
+    width: 14rem;
+    margin: .5rem;
+}
+
+.productCard:hover {
+    scale: 1.01;
+    transition: 1s;
+    box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+.productCard_title {
+    font-size: small; 
+}
