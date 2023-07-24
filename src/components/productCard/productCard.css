@@ -14,3 +14,14 @@
 .productCard_title {
     font-size: small; 
 }
+
+.price_Container {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.addCartButton_container {
+    margin: .2rem;
+    display: flex;
+    justify-content: flex-end;
+}
