@@ -3,18 +3,21 @@ import './productCard.css'
 import { Button, Card} from 'react-bootstrap'
 import televisor from './../../assets/img/istockphoto-638043774-612x612.jpg'
 
-const ProductCard = () => {
+const ProductCard = ({product, setShowToProduct}) => {
+
   return (
-    <div className='productCard_container'>
-        <Card className='productCard'>
+    <div className='productCard_container' onClick={()=>setShowToProduct(product)}>
+        <Card className='productCard' >
         <Card.Img variant="top" src={televisor} />
             <Card.Body>
-                <Card.Title className='productCard_title'>Smart Tv 50 Pulgadas 4k Ultra HD - Marca: Samsung</Card.Title>
+                <Card.Title className='productCard_title'> {product?.name} - Marca: {product?.brand}</Card.Title>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
+                {product.description}
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <div className='price_Container'>${product.price}</div>
+                <div className='addCartButton_container'>
+                  <Button variant="primary" className='addCartButton'>Agregar al Carrito</Button>
+                </div>
             </Card.Body>
         </Card>
     </div>
