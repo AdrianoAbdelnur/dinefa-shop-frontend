@@ -3,15 +3,25 @@ import './home.css'
 import ProductCard from '../../productCard/ProductCard'
 import { CarouselComponent } from '../../carousel/CarouselComponent'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 const Home = () => {
+  let navigate =useNavigate();
   const [products, setproducts] = useState([])
-
+  const [productToShow, setProductToShow] = useState({})
 
 useEffect(() => {
   getProducts()
 }, [])
+
+useEffect(() => {
+  if (productToShow._id) {
+    navigate(`/product#${productToShow._id}`)
+  }
+}, [productToShow])
+
+
 
 const getProducts = async() => {
   try {
@@ -34,43 +44,9 @@ const getProducts = async() => {
             products.map((product)=>{
               return (
                 <ProductCard
+                  key={product.name+product.brand+product.model}
                   product={product}
-                />
-              )
-            })
-            :
-            "No hay productos para mostrar"
-        }
-        {
-          products.length?
-            products.map((product)=>{
-              return (
-                <ProductCard
-                  product={product}
-                />
-              )
-            })
-            :
-            "No hay productos para mostrar"
-        }
-        {
-          products.length?
-            products.map((product)=>{
-              return (
-                <ProductCard
-                  product={product}
-                />
-              )
-            })
-            :
-            "No hay productos para mostrar"
-        }
-        {
-          products.length?
-            products.map((product)=>{
-              return (
-                <ProductCard
-                  product={product}
+                  setShowToProduct={setProductToShow}
                 />
               )
             })
