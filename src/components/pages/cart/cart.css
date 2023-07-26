@@ -1,0 +1,14 @@
+.cart_container {
+    background-color: #ebebf8;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    flex-direction: row;
+    width: 100%;
+}
+
+.table_container {
+    width: 100vw;
+    margin: 3rem;
+}
