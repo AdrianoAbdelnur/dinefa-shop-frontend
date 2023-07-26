@@ -7,6 +7,7 @@ import Alerticon from '../../../assets/icons/Alerticon';
 import X from '../../../assets/icons/X';
 import EyeOff from '../../../assets/icons/EyeOff';
 import EyeCheck from '../../../assets/icons/EyeCheck';
+import './register.css'
 
     const USER_REGEX = /^[A-z][A-z0-9-_]{4,16}$/;
     const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
