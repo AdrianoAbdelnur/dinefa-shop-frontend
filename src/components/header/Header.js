@@ -22,8 +22,8 @@ const Header = () => {
           <Button onClick={()=>navigate('/carts')}>Cart</Button>
         </div>
         <div className='navbar_options'>
-            <a href='login' id='login'>INGRESAR</a>
-            <a href='facebook.com' id='register'>REGISTRARSE</a>
+            <a href='./login' id='login'>INGRESAR</a>
+            <a href='./register' id='register'>REGISTRARSE</a>
             <a href='facebook.com' id='register'>AYUDA</a>
             <a href='facebook.com' id='register'>CONTACTO</a>
         </div>
