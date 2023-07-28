@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../../api/axios'
 import React, { useEffect, useState } from 'react'
 import { Accordion, Alert, Button } from 'react-bootstrap';
 import Cart from './Cart';
@@ -12,25 +12,20 @@ const Carts = () => {
     const [errorMessage, setErrorMessage] = useState("")
   
     useEffect(() => {
-      getCarts();
+        getCarts();
     }, [])
   
     const getCarts = async() => {
-      try {
-        const {data}= await axios({
-          baseURL:'http://localhost:4000/api/cart/getCarts', 
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRiZmJlNTY5MDNhOTYzNmU0YjhhNDk0Iiwicm9sZSI6InVzZXIifSwiaWF0IjoxNjkwMzExODU5LCJleHAiOjE2OTAzMTkwNTl9.U7CsSHzSoRXwESJb4qhEFthoWMM6f7zcRqGVqeqDpXA'
-        }})
-        const cartstoShow = data.ownCarts.filter(cart => cart.cartStatus === 'bought' || cart.cartStatus === 'cancelled' || cart.cartStatus === 'delivered' || cart.cartStatus === 'preparing');
-        setCarts(cartstoShow.reverse());
-        setActiveCart(data.ownCarts.find((cart)=> cart.cartStatus === "active"))
-      } catch (error) {
-        setErrorMessage(error.message);
-      }
+        try {
+            const {data}= await axios('/cart/getCarts')
+            const cartstoShow = data.ownCarts.filter(cart => cart.cartStatus === 'bought' || cart.cartStatus === 'cancelled' || cart.cartStatus === 'delivered' || cart.cartStatus === 'preparing');
+            setCarts(cartstoShow.reverse());
+            setActiveCart(data.ownCarts.find((cart)=> cart.cartStatus === "active"))
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
     }
-  return (
+return (
     <div className='cart_container'>
         {
         errorMessage &&
