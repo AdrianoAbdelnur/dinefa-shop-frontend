@@ -5,9 +5,10 @@ import Product from '../../src/components/pages/productPage/Product'
 import Carts from '../components/pages/cart/Carts'
 import Register from '../components/pages/register/Register'
 import Login from '../components/pages/login/Login'
+import RequireAuth from '../requireAuth/RequireAuth'
 
 
-const Router = () => {
+const Router = ({props}) => {
   return (
     <BrowserRouter>
       <Layout>
@@ -15,9 +16,11 @@ const Router = () => {
               <Route path='/' element={<Home/>}   />
               <Route path='/register' element={<Register/>}   />
               <Route path='/login' element={<Login/>}   />
-              <Route path='/login' element={<>login</>}/>
-              <Route path='/product' element={<Product/>}/>
-              <Route path='/carts' element={<Carts/>}/>
+              
+              <Route element={<RequireAuth {...props} />}>
+                <Route path='/product' element={<Product/>}/>
+                <Route path='/carts' element={<Carts/>}/>
+              </Route>
           </Routes>
       </Layout>
     </BrowserRouter>

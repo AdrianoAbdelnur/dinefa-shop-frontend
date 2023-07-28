@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../../api/axios'
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, Form } from 'react-bootstrap';
 import CheckedInput from '../../../assets/icons/CheckedInput';
@@ -117,7 +117,7 @@ const Register = () => {
         payload.email = email;
         payload.password = password
         try {
-            await axios.post("http://localhost:4000/api/user/register", payload);
+            await axios.post("/user/register", payload);
             setUserName("");
             setEmail("");
             setPassword("");

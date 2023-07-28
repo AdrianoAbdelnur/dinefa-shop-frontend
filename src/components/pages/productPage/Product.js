@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import './product.css'
 import { useLocation } from 'react-router-dom'
-import axios from 'axios';
+import axios from '../../../api/axios'
 import { Image } from 'react-bootstrap';
 
 const Product = () => {
@@ -22,7 +22,7 @@ const Product = () => {
 
   const getProduct = async(id) => {
     try {
-      const {data} = await axios('http://localhost:4000/api/product/getProduct/'+ id)
+      const {data} = await axios('/product/getProduct/'+ id)
       console.log(data.product)
       setProduct(data.product)
     } catch (error) {
