@@ -5,14 +5,12 @@ import axios from '../../../api/axios'
 import Checked from '../../../assets/icons/Checked';
 import Alerticon from '../../../assets/icons/Alerticon';
 import { useEffect, useState } from 'react';
-/* import useAuth from '../../hooks/useAuth'; */
 import EyeOff from '../../../assets/icons/EyeOff';
 import EyeCheck from '../../../assets/icons/EyeCheck';
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /.{6,16}$/;
 
 const Login = () => {
-/*   const {auth, setAuth} = useAuth(); */
   const [email, setEmail] = useState("")
   const [emailFocus, setEmailFocus] = useState(false)
   const [validEmail, setValidEmail] = useState("")
@@ -46,7 +44,7 @@ const Login = () => {
       localStorage.setItem('jwtoken', data?.token);
       setEmail("");
       setPassword("");
-      /* window.location.replace('/'); */
+      window.location.replace('/');
     } catch (error) {
       setError(error?.response?.data?.message);
     }

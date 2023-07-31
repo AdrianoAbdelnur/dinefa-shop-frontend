@@ -35,7 +35,7 @@ const getProducts = async() => {
 
   return (
     <div className='home_container'>
-      <div className='w-100 m-3'>
+      <div className='w-100 m-2'>
         <CarouselComponent/>
       </div>
       <div className='products'>
