@@ -10,7 +10,7 @@ const Carts = () => {
     const [carts, setCarts] = useState([]);
     const [activeCart, setActiveCart, ]= useState({})
     const [errorMessage, setErrorMessage] = useState("")
-  
+
     useEffect(() => {
         getCarts();
     }, [])
@@ -135,7 +135,7 @@ return (
             variant='secondary'
             onClick={() => navigate('/')}
             >
-                Back to menu
+                Seguir comprando
             </Button>
         </div>
     </div>
