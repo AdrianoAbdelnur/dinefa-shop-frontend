@@ -7,23 +7,30 @@ import Register from '../components/pages/register/Register'
 import Login from '../components/pages/login/Login'
 import RequireAuth from '../requireAuth/RequireAuth'
 import Unauthorized from '../unauthorized/Unauthorized'
+import { useState } from 'react'
+import Admin from '../components/pages/admin/Admin'
 
 
-const Router = (props) => {
-  console.log(props)
+const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
           <Routes>
               <Route path='/' element={<Home/>}   />
               <Route path='/register' element={<Register/>}   />
-              <Route path='/login' element={<Login/>}   />
+              <Route path='/login' element={<Login />}   />
+              <Route path='/product' element={<Product />}/>
               <Route path='/unauthorized' element={<Unauthorized/>}   />
               
-              <Route element={<RequireAuth {...props} />}>
-                <Route path='/product' element={<Product/>}/>
-                <Route path='/carts' element={<Carts/>}/>
+              <Route element={<RequireAuth allowedRole={'admin'}/>}>
+                <Route path='/admin' element={<Admin />}/>
               </Route>
+              
+              <Route element={<RequireAuth allowedRole={'user'}/>}>
+                <Route path='/carts' element={<Carts />}/>
+              </Route>
+                
+                
           </Routes>
       </Layout>
     </BrowserRouter>
