@@ -7,10 +7,13 @@ import Alerticon from '../../../assets/icons/Alerticon';
 import { useEffect, useState } from 'react';
 import EyeOff from '../../../assets/icons/EyeOff';
 import EyeCheck from '../../../assets/icons/EyeCheck';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /.{6,16}$/;
 
-const Login = () => {
+const Login = ({setLoggedFlag}) => {
+  const {setAuth} = useAuth();
   const [email, setEmail] = useState("")
   const [emailFocus, setEmailFocus] = useState(false)
   const [validEmail, setValidEmail] = useState("")
@@ -21,6 +24,10 @@ const Login = () => {
   const [showPwd, setShowPwd] = useState(false)
 
   const [error, setError] = useState("")
+
+  const Navigate= useNavigate();
+  const location= useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email))
@@ -42,11 +49,23 @@ const Login = () => {
       e.preventDefault();
       const {data} = await axios.post("/user/login", {email, password});
       localStorage.setItem('jwtoken', data?.token);
+      getAuthStatus();
       setEmail("");
       setPassword("");
-      window.location.replace('/');
+      Navigate(from, {replace: true});
+      setLoggedFlag(true)
     } catch (error) {
       setError(error?.response?.data?.message);
+    }
+  };
+
+  const getAuthStatus = async () => {
+    try {
+      const { data } = await axios.get('/user/status');
+      if (!data?.isLogged) setAuth({ isLogged: false });
+      else setAuth({ isLogged: true, role: data.role });
+    } catch (error) {
+      localStorage.clear('token')
     }
   };
 

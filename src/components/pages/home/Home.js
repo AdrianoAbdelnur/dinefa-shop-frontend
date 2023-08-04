@@ -4,6 +4,7 @@ import ProductCard from '../../productCard/ProductCard'
 import { CarouselComponent } from '../../carousel/CarouselComponent'
 import axios from '../../../api/axios'
 import { useNavigate } from 'react-router-dom'
+import useAuth from '../../../hooks/useAuth'
 
 
 const Home = () => {

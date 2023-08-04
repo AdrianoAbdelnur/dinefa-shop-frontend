@@ -21,7 +21,6 @@ clientAxios.interceptors.response.use(
 
 clientAxios.interceptors.request.use((config) => {
   const token = localStorage.getItem('jwtoken');
-  console.log(token)
   config.headers.Authorization = token ?? '';
   return config;
 }); 

@@ -3,17 +3,26 @@ import './header.css'
 import logo from './../../assets/img/logo-dinefa.png'
 import {Button, Form, InputGroup } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import useAuth from '../../hooks/useAuth'
 import axios from '../../api/axios'
+import useAuth from '../../hooks/useAuth'
 
 const Header = () => {
+  const {auth} = useAuth()
+  console.log(auth)
   const [userData, setUserData] = useState({})
-  const {auth} = useAuth();
   let navigate = useNavigate();
-
+  
+   
+  useEffect(() => {
+    getUserData();
+  }, [])
+  
 useEffect(() => {
-  getUserData();
+  if (auth) {
+    getUserData();
+  }
 }, [auth])
+
 
 const getUserData = async() => {
   try {
@@ -43,12 +52,11 @@ const handleLogOut = () => {
         />
       </InputGroup>
       <div>
-        
           {
             userData.name && 
             <div className='d-flex flex-row justify-content-around'>
               <div>Bienvenido {userData.name}</div>
-              <Button onClick={()=>navigate('/carts')}>Cart</Button>
+              <Button onClick={()=>navigate('/carts')}>Carrito</Button>
               <Link
                   to={'/'}
                   className="navOptions boton1"
@@ -62,12 +70,12 @@ const handleLogOut = () => {
             {
               !userData.name && 
               <>
-              <a href='./login' id='login'>INGRESAR</a>
-              <a href='./register' id='register'>REGISTRARSE</a>
+              <Link to='./login' id='login'>INGRESAR</Link>
+              <Link to='./register' id='register'>REGISTRARSE</Link>
               </>
             }
-            <a href='facebook.com' id='register'>AYUDA</a>
-            <a href='facebook.com' id='register'>CONTACTO</a>
+            <Link to='facebook.com' id='register'>AYUDA</Link>
+            <Link to='facebook.com' id='register'>CONTACTO</Link>
         </div>
       </div>
     </div>

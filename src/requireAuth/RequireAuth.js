@@ -1,11 +1,11 @@
 import axios from '../api/axios';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import useAuth from '../hooks/useAuth';
 
-const RequireAuth = ({ authProvider }) => {
-  console.log(authProvider)
+const RequireAuth = ({allowedRole}) => {
   const location = useLocation();
-  const { setAuth } = authProvider;
+  const { setAuth } = useAuth();
   const [loggedStatus, setLoggedStatus] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,9 +32,11 @@ const RequireAuth = ({ authProvider }) => {
 
   return (
     !isLoading
-      ? loggedStatus?.isLogged
-        ? <Outlet context={authProvider} />
-        : <Navigate to="/unauthorized" state={{ from: location }} replace />
+      ? loggedStatus?.role === allowedRole
+        ? <Outlet />
+        : loggedStatus?.isLogged
+        ? <Navigate to="/unauthorized" state={{ from: location }} replace />
+        : <Navigate to="/login" state={{ from: location }} replace />
       : <p>loading</p>
   );
 };
