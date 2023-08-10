@@ -19,7 +19,7 @@ const Cart = ({cart}) => {
             <tbody>
               {cart.products?.map((product)=> {
                 return(
-                  <CartRow product={product}/>
+                  <CartRow product={product} key={product.idProduct.name}/>
                   )
               })}
             </tbody>
