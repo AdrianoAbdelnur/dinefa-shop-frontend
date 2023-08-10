@@ -8,7 +8,6 @@ import useAuth from '../../hooks/useAuth'
 
 const Header = () => {
   const {auth} = useAuth()
-  console.log(auth)
   const [userData, setUserData] = useState({})
   let navigate = useNavigate();
   
