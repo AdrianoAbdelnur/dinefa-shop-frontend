@@ -3,8 +3,6 @@ import { Form, Table } from 'react-bootstrap'
 import CartRow from './CartRow'
 
 const Cart = ({cart}) => {
-  
-
   return (
     <div className='cart_container'>
       <Form className='table_container'>

@@ -13,8 +13,10 @@
     margin: 3rem;
 }
 
-.quantity_imput {
-    width: 6rem !important;
-    background-color: red;
+.quantityButton {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50% !important;
+    padding: 0 !important;
 }
 
