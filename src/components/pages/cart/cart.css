@@ -13,3 +13,8 @@
     margin: 3rem;
 }
 
+.quantity_imput {
+    width: 6rem !important;
+    background-color: red;
+}
+

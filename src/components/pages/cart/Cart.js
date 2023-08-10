@@ -1,35 +1,32 @@
 import './cart.css'
-import { Table } from 'react-bootstrap'
+import { Form, Table } from 'react-bootstrap'
+import CartRow from './CartRow'
 
 const Cart = ({cart}) => {
+  
+
   return (
     <div className='cart_container'>
-      <div className='table_container'>
-        <Table striped bordered hover variant="primary" className='cartTable'>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Precio unitario</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart.products?.map((product)=> {
-              return(
-                <tr key={product.idProduct.name}>
-                <td>1</td>
-                <td>{product.idProduct.name}</td>
-                <td>{product.quantity}</td>
-                <td>{product.price}</td>
-                <td>{product.price*product.quantity}</td>
-              </tr>)
-            })}
-          </tbody>
-        </Table>
-      </div>
-
+      <Form className='table_container'>
+          <Table striped bordered hover variant="primary" className='cartTable'>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.products?.map((product)=> {
+                return(
+                  <CartRow product={product}/>
+                  )
+              })}
+            </tbody>
+          </Table>
+      </Form>
     </div>
   )
 }
