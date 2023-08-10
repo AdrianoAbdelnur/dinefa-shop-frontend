@@ -5,7 +5,7 @@ import './cart.css'
 const CartRow = ({product}) => {
     const [quantityAdd, setQuantityAdd] = useState(0)
   return (
-    <tr key={product.idProduct.name}>
+    <tr >
         <td>1</td>  
         <td>{product.idProduct.name}</td>
         <td className='d-flex justify-content-around '>
