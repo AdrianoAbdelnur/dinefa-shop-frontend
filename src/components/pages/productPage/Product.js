@@ -69,7 +69,7 @@ const Product = () => {
           <h4>{product.brand}</h4>
             <h5>{product.name}</h5>
           <p><b>${product.price}</b></p>
-          <p>quantity: 
+          <p>Cantidad: 
           <Form.Control type='number' value={quantity} onChange={(e)=>setQuantity(e.target.value)} name='quantity' placeholder="cantidad" />
           </p>
           <Button variant='primary' type='submit' >Agregar al carrito</Button>

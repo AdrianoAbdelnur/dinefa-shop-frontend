@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
 import useAuth from '../../hooks/useAuth'
 
-const Header = () => {
+const Header = ({searchInput, setSearchInput}) => {
   const {auth} = useAuth()
   const [userData, setUserData] = useState({})
   let navigate = useNavigate();
@@ -48,6 +48,7 @@ const handleLogOut = () => {
           placeholder="¿Que estas buscando?"
           aria-label="search"
           aria-describedby="search"
+          onChange={(e)=>setSearchInput(e.target.value)}
           />
         </InputGroup>
       } 

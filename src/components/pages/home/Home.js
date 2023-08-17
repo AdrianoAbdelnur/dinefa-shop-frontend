@@ -4,10 +4,9 @@ import ProductCard from '../../productCard/ProductCard'
 import { CarouselComponent } from '../../carousel/CarouselComponent'
 import axios from '../../../api/axios'
 import { useNavigate } from 'react-router-dom'
-import useAuth from '../../../hooks/useAuth'
 
 
-const Home = () => {
+const Home = ({searchInput}) => {
   let navigate =useNavigate();
   const [products, setproducts] = useState([])
   const [productToShow, setProductToShow] = useState({})
@@ -16,10 +15,12 @@ useEffect(() => {
   getProducts()
 }, [])
 
+
 useEffect(() => {
   if (productToShow._id) {
     navigate(`/product#${productToShow._id}`)
   }
+  // eslint-disable-next-line
 }, [productToShow])
 
 
