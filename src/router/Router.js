@@ -8,14 +8,19 @@ import Login from '../components/pages/login/Login'
 import RequireAuth from '../requireAuth/RequireAuth'
 import Unauthorized from '../unauthorized/Unauthorized'
 import Admin from '../components/pages/admin/Admin'
+import { useState } from 'react'
 
 
 const Router = () => {
+  const [searchInput, setSearchInput] = useState("")
   return (
     <BrowserRouter>
-      <Layout>
+      <Layout 
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}  
+      >
           <Routes>
-              <Route path='/' element={<Home/>}   />
+              <Route path='/' element={<Home searchInput={searchInput}/>}   />
               <Route path='/register' element={<Register/>}   />
               <Route path='/login' element={<Login />}   />
               <Route path='/product' element={<Product />}/>
