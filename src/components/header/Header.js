@@ -42,14 +42,15 @@ const handleLogOut = () => {
   return (
     <div className='header_container'>
       <img src={logo} alt='logo Dinefa' className='logo'></img>
-      { window.location.pathname === '/' && <InputGroup className="mb-3 w-50 searchInput">
-          <InputGroup.Text id="search">Buscar</InputGroup.Text>
-          <Form.Control
-          placeholder="¿Que estas buscando?"
-          aria-label="search"
-          aria-describedby="search"
-          onChange={(e)=>setSearchInput(e.target.value)}
-          />
+      { (window.location.pathname === '/' || window.location.pathname === '/adminProducts')
+      && <InputGroup className="mb-3 w-50 searchInput">
+            <InputGroup.Text id="search">Buscar</InputGroup.Text>
+            <Form.Control
+            placeholder="¿Que estas buscando?"
+            aria-label="search"
+            aria-describedby="search"
+            onChange={(e)=>setSearchInput(e.target.value)}
+            />
         </InputGroup>
       } 
       <div>

@@ -1,0 +1,23 @@
+.AdminProducts_container {
+    background-color: #ebebf8;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    flex-direction: row;
+    width: 100%;
+}
+
+.imageRow {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.productsTable {
+    background-color: aliceblue;
+    max-width: 100%;
+    margin: 0 2rem;
+    height: fit-content;
+} 
