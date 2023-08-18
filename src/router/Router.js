@@ -29,7 +29,7 @@ const Router = () => {
               
               <Route element={<RequireAuth allowedRole={'admin'}/>}>
                 <Route path='/admin' element={<Admin />}/>
-                <Route path='/adminProducts' element={<AdminProducts />}/>
+                <Route path='/adminProducts' element={<AdminProducts searchInput={searchInput}/>}/>
               </Route>
               
               <Route element={<RequireAuth allowedRole={'user'}/>}>
