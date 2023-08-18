@@ -34,9 +34,6 @@ useEffect(() => {
   // eslint-disable-next-line
 }, [searchInput])
 
-
-
-
 const getProducts = async() => {
   try {
     const {data}= await axios("/product/getAllProducts")
@@ -69,7 +66,6 @@ const getProducts = async() => {
             "No hay productos para mostrar"
         }
       </div>
-
     </div>
   )
 }
