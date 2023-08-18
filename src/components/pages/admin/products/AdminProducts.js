@@ -15,7 +15,8 @@ const AdminProducts = ({searchInput}) => {
     const productsFound = products?.filter((product) => 
     (product?.name.toLowerCase()?.includes(searchInput.toLocaleLowerCase())) ||
     (product?.brand.toLowerCase()?.includes(searchInput.toLocaleLowerCase())) || 
-    (product?.brand.toLowerCase()?.includes(searchInput.toLocaleLowerCase()))  
+    (product?.brand.toLowerCase()?.includes(searchInput.toLocaleLowerCase())) || 
+    (product?.category.name.toLowerCase()?.includes(searchInput.toLocaleLowerCase()))  
     )
     setFilteredProducts(productsFound)
     // eslint-disable-next-line
