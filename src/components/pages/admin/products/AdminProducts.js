@@ -2,10 +2,12 @@ import axios from './../../../../api/axios';
 import React, { useEffect, useState } from 'react'
 import './adminProducts.css'
 import { Button, Image, Table } from 'react-bootstrap';
+import ProductModal from './modal/ProductModal';
 
 const AdminProducts = ({searchInput}) => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
+    const [showModal, setShowModal] = useState(false)
   
   useEffect(() => {
     getProducts()
@@ -35,7 +37,7 @@ const AdminProducts = ({searchInput}) => {
   return (
     <div className='AdminProducts_container'>
       <div className='addProductButton_container'>
-        <Button variant='primary' className='addProductButton'>Añadir producto</Button>
+        <Button variant='primary' className='addProductButton' onClick={()=>setShowModal(true)}>Añadir producto</Button>
       </div>
       <Table striped bordered hover className='productsTable'>
         <thead>
@@ -69,6 +71,13 @@ const AdminProducts = ({searchInput}) => {
           
         </tbody>
     </Table>
+    <ProductModal
+      show={showModal}
+      setShow={setShowModal}
+    />
+
+
+
     </div>
   )
 }
