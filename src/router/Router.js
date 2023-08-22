@@ -9,6 +9,7 @@ import RequireAuth from '../requireAuth/RequireAuth'
 import Unauthorized from '../unauthorized/Unauthorized'
 import Admin from '../components/pages/admin/Admin'
 import { useState } from 'react'
+import AdminProducts from '../components/pages/admin/products/AdminProducts'
 
 
 const Router = () => {
@@ -28,6 +29,7 @@ const Router = () => {
               
               <Route element={<RequireAuth allowedRole={'admin'}/>}>
                 <Route path='/admin' element={<Admin />}/>
+                <Route path='/adminProducts' element={<AdminProducts searchInput={searchInput}/>}/>
               </Route>
               
               <Route element={<RequireAuth allowedRole={'user'}/>}>

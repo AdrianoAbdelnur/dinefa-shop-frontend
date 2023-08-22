@@ -28,14 +28,12 @@ useEffect(() => {
   const productsFound = products?.filter((product) => 
   (product?.name.toLowerCase()?.includes(searchInput.toLocaleLowerCase())) ||
   (product?.brand.toLowerCase()?.includes(searchInput.toLocaleLowerCase())) || 
-  (product?.brand.toLowerCase()?.includes(searchInput.toLocaleLowerCase()))  
+  (product?.brand.toLowerCase()?.includes(searchInput.toLocaleLowerCase())) ||  
+  (product?.category.name.toLowerCase()?.includes(searchInput.toLocaleLowerCase()))  
   )
   setFilteredProducts(productsFound)
   // eslint-disable-next-line
 }, [searchInput])
-
-
-
 
 const getProducts = async() => {
   try {
@@ -69,7 +67,6 @@ const getProducts = async() => {
             "No hay productos para mostrar"
         }
       </div>
-
     </div>
   )
 }
