@@ -2,10 +2,10 @@
     background-color: #ebebf8;
     display: flex;
     flex: 1;
-    flex-wrap: wrap;
     overflow-y: scroll;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
+    align-items: center;
 }
 
 .imageRow {
@@ -17,7 +17,15 @@
 
 .productsTable {
     background-color: aliceblue;
-    max-width: 100%;
+    max-width: 95%;
     margin: 0 2rem;
     height: fit-content;
 } 
+
+.addProductButton_container {
+    width: 90vw;
+    display: flex;
+    justify-content: end;
+    margin: 1rem;
+}
+

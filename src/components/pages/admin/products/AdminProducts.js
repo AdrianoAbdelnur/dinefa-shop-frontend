@@ -34,38 +34,40 @@ const AdminProducts = ({searchInput}) => {
   }
   return (
     <div className='AdminProducts_container'>
-        <Table striped bordered hover className='productsTable'>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>image</th>
-          <th>Name</th>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Category</th>  
-          <th>Editar / borrar</th>    
-        </tr>
-      </thead>
-      <tbody>
-        
-            {
-                filteredProducts.map((product, index)=> {
-                    return(
-                        <tr>
-                            <td>{index}</td>
-                            <td className='d-flex justify-content-center'><Image src={product.image} rounded className='imageRow'/></td>
-                            <td>{product.name}</td>
-                            <td>{product.brand}</td>
-                            <td>{product.model}</td>
-                            <td>{product.category.name}</td>
-                            <td><Button variant='warning'>edit</Button> <Button variant='danger'>delete</Button></td>
-                        </tr>
-                    )    
-                }
-                )
-            }
-        
-      </tbody>
+      <div className='addProductButton_container'>
+        <Button variant='primary' className='addProductButton'>Añadir producto</Button>
+      </div>
+      <Table striped bordered hover className='productsTable'>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Category</th>  
+            <th>Editar / borrar</th>    
+          </tr>
+        </thead>
+        <tbody>
+              {
+                  filteredProducts.map((product, index)=> {
+                      return(
+                          <tr>
+                              <td>{index}</td>
+                              <td className='d-flex justify-content-center'><Image src={product.image} rounded className='imageRow'/></td>
+                              <td>{product.name}</td>
+                              <td>{product.brand}</td>
+                              <td>{product.model}</td>
+                              <td>{product.category.name}</td>
+                              <td><Button variant='warning'>edit</Button> <Button variant='danger'>delete</Button></td>
+                          </tr>
+                      )    
+                  }
+                  )
+              }
+          
+        </tbody>
     </Table>
     </div>
   )
