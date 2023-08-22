@@ -25,7 +25,6 @@
 .addProductButton_container {
     width: 90vw;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 1rem;
 }
-
