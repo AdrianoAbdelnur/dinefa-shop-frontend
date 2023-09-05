@@ -1,20 +1,69 @@
-import React, { useState } from 'react'
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Button, Col, Form, Image, Modal, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import FileButton from '../FileButton';
 
 const ProductModal = ({ show, setShow }) => {
     const [showInputDetails, setShowInputDetails] = useState(false)
     const [image, setImage] = useState()
+    const [feature, setFeature] = useState("")
+    const [featureDetail, setFeatureDetail] = useState("")
+    const [featuresArray, setFeaturesArray] = useState([])
+    const [payload, setPayload] = useState({})
+
+
+
+    useEffect(() => {
+      console.log(featuresArray)
+    }, [featuresArray])
+
+    useEffect(() => {
+        if (payload.image) {
+            setImage()
+            setFeaturesArray([])
+            console.log(payload)
+        }
+    }, [payload])
+    
     
 
-    const handleClose = () => setShow(false);
+    const addFeature = () => {
+        if(feature!== "" && featureDetail!==""){
+            setFeaturesArray([...featuresArray, {feature:feature , detail: featureDetail}]);
+            setFeature("");
+            setFeatureDetail("");
+            setShowInputDetails(false)
+        }
+    }
+    
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    const product = {}
+    product.nombre = e.target[0].value;
+    product.marca = e.target[1].value;
+    product.modelo = e.target[2].value;
+    for (const option of e.target[3]) {
+        if (option.selected === true) {
+            product.option = option.value
+        }
+    }
+    product.description = e.target[6].value;
+    product.price = e.target[7].value;
+    setPayload({...product, image: image, features: featuresArray })
+}
+
+
+
+    const handleClose = () => {
+        setShow(false)
+    };
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Añadir Producto</Modal.Title>
             </Modal.Header>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Modal.Body>
                         <Form.Group className="mb-3" controlId="name">
                             <Form.Label>Nombre</Form.Label>
@@ -36,9 +85,12 @@ const ProductModal = ({ show, setShow }) => {
                                 <option value="3">Three</option>
                             </Form.Select>
                         </Form.Group>
-                        <FileButton
-                            setFile={setImage}
-                        />
+                        <div className='image_container'>
+                            <FileButton
+                                setFile={setImage}
+                                />
+                            <Image src={image} className='productImage'></Image>
+                        </div>
                         <Form.Group className="mb-3" controlId="description">
                             <Form.Label>Descripción:</Form.Label>
                             <Form.Control as="textarea" placeholder="Agregue la descripción del producto" />
@@ -58,20 +110,35 @@ const ProductModal = ({ show, setShow }) => {
                                     <Form.Label>Detalles:</Form.Label>
                                     <Row>
                                         <Col>
-                                            <Form.Control type="text" placeholder=" Característica" />
+                                            <Form.Control type="text" placeholder="Caracteristica" onChange={(e)=>setFeature(e.target.value)}/>
                                         </Col>
                                         <Col>
-                                            <Form.Control type="text" placeholder="Detalle" />
+                                            <Form.Control type="text" placeholder="Detalle" onChange={(e)=>setFeatureDetail(e.target.value)} />
                                         </Col>
                                     </Row>
+                                    <Link
+                                        onClick={addFeature}
+                                        >
+                                        Añadir
+                                    </Link>
                                 </Form.Group>
-                                <Link
-                                    className=""
-                                    onClick={()=>setShowInputDetails(false)}
-                                    >
-                                    Añadir
-                                </Link>
                             </div>
+                        }
+                        {
+                            featuresArray &&
+                            <div className='feature_container'>
+                            <div>Caracteristica</div>
+                            <div className='featureDetail'>Detalle</div>
+                            </div>
+                        }
+                        {
+                            featuresArray.map((feature)=> {
+                                return(
+                                    <div className='feature_container'>
+                                        <div>{feature.feature}:</div>
+                                        <div className='featureDetail'>{feature.detail}</div>
+                                    </div>
+                                )})
                         }
                         <Form.Group className="mb-3" controlId="price">
                             <Form.Label>Precio</Form.Label>
