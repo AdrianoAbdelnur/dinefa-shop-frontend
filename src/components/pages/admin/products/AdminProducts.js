@@ -34,6 +34,15 @@ const AdminProducts = ({searchInput}) => {
       console.log(error)
     }
   }
+
+  const handleDeleteProduct = async(id) => {
+    try {
+      await axios.patch("/product/deleteProduct/"+id)
+      getProducts()
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className='AdminProducts_container'>
       <div className='addProductButton_container'>
@@ -62,7 +71,7 @@ const AdminProducts = ({searchInput}) => {
                               <td>{product.brand}</td>
                               <td>{product.model}</td>
                               <td>{product.category.name}</td>
-                              <td><Button variant='warning'>edit</Button> <Button variant='danger'>delete</Button></td>
+                              <td><Button variant='warning'>edit</Button> <Button variant='danger' onClick={()=>handleDeleteProduct(product._id)}>delete</Button></td>
                           </tr>
                       )    
                   }
