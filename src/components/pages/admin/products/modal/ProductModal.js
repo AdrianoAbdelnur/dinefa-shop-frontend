@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Image, Modal, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import FileButton from '../FileButton';
+import axios from '../../../../../api/axios'
 
 const ProductModal = ({ show, setShow }) => {
     const [showInputDetails, setShowInputDetails] = useState(false)
@@ -11,18 +12,13 @@ const ProductModal = ({ show, setShow }) => {
     const [featuresArray, setFeaturesArray] = useState([])
     const [payload, setPayload] = useState({})
 
-
-
-    useEffect(() => {
-      console.log(featuresArray)
-    }, [featuresArray])
-
     useEffect(() => {
         if (payload.image) {
+            handleAddProduct()
             setImage()
             setFeaturesArray([])
-            console.log(payload)
         }
+        // eslint-disable-next-line
     }, [payload])
     
     
@@ -40,12 +36,12 @@ const ProductModal = ({ show, setShow }) => {
 const handleSubmit = (e) => {
     e.preventDefault();
     const product = {}
-    product.nombre = e.target[0].value;
-    product.marca = e.target[1].value;
-    product.modelo = e.target[2].value;
+    product.name = e.target[0].value;
+    product.brand = e.target[1].value;
+    product.model = e.target[2].value;
     for (const option of e.target[3]) {
         if (option.selected === true) {
-            product.option = option.value
+            product.category = option.value
         }
     }
     product.description = e.target[6].value;
@@ -53,7 +49,14 @@ const handleSubmit = (e) => {
     setPayload({...product, image: image, features: featuresArray })
 }
 
-
+    const handleAddProduct = async() => {
+        try {
+            console.log(payload)
+            await axios.post("/product/addProduct", payload)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const handleClose = () => {
         setShow(false)
@@ -80,9 +83,9 @@ const handleSubmit = (e) => {
                         <Form.Group className="mb-3" controlId="model">
                             <Form.Select aria-label="Floating label select example">
                                 <option>Seleccione una Categoría</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="64b58680f122d167152f247a">One</option>
+                                <option value="64b58680f122d167152f247a">Two</option>
+                                <option value="64b58680f122d167152f247a">Three</option>
                             </Form.Select>
                         </Form.Group>
                         <div className='image_container'>

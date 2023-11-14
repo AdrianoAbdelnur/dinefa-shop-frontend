@@ -11,7 +11,6 @@ export default function FileButton({setFile}) {
         const fileUploaded = e.target.files[0]
         beforeUpload(fileUploaded);
         const base64 = await getBase64(fileUploaded);
-        console.log(base64)
         setFile(base64)
     }
 
