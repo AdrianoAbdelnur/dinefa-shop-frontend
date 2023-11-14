@@ -55,7 +55,7 @@ const AdminProducts = ({searchInput}) => {
               {
                   filteredProducts.map((product, index)=> {
                       return(
-                          <tr>
+                          <tr key={product._id}>
                               <td>{index}</td>
                               <td className='d-flex justify-content-center'><Image src={product.image} rounded className='imageRow'/></td>
                               <td>{product.name}</td>
@@ -71,6 +71,7 @@ const AdminProducts = ({searchInput}) => {
           
         </tbody>
     </Table>
+
     <ProductModal
       show={showModal}
       setShow={setShowModal}
