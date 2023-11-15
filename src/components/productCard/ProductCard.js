@@ -1,14 +1,13 @@
 import React from 'react'
 import './productCard.css'
 import { Button, Card} from 'react-bootstrap'
-import televisor from './../../assets/img/istockphoto-638043774-612x612.jpg'
 
 const ProductCard = ({product, setShowToProduct}) => {
 
   return (
     <div className='productCard_container' onClick={()=>setShowToProduct(product)}>
         <Card className='productCard' >
-        <Card.Img variant="top" src={televisor} />
+        <Card.Img variant="top" src={product?.image} />
             <Card.Body>
                 <Card.Title className='productCard_title'> {product?.name} - Marca: {product?.brand}</Card.Title>
                 <Card.Text>
