@@ -10,8 +10,11 @@ const AdminProducts = ({searchInput}) => {
     const [showModal, setShowModal] = useState(false)
   
   useEffect(() => {
-    getProducts()
-  }, [])
+    if (!showModal) {
+      getProducts()
+    }
+  }, [showModal])
+  
   
   useEffect(() => {
     const productsFound = products?.filter((product) => 
@@ -22,14 +25,13 @@ const AdminProducts = ({searchInput}) => {
     )
     setFilteredProducts(productsFound)
     // eslint-disable-next-line
-  }, [searchInput])
+  }, [searchInput, products])
   
   const getProducts = async() => {
     try {
       const {data}= await axios("/product/getAllProducts")
       setProducts(data.products)
       setFilteredProducts(data.products)
-      console.log(data.products)
     } catch (error) {
       console.log(error)
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Form, Image, Modal, Row } from 'react-bootstrap'
+import { Alert, Button, Col, Form, Image, Modal, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import FileButton from '../FileButton';
 import axios from '../../../../../api/axios'
@@ -11,16 +11,33 @@ const ProductModal = ({ show, setShow }) => {
     const [featureDetail, setFeatureDetail] = useState("")
     const [featuresArray, setFeaturesArray] = useState([])
     const [payload, setPayload] = useState({})
-
+    const [categories, setCategories] = useState([])
+    const [message, setMessage] = useState("")
+    
+    useEffect(() => {
+        if (message) {
+            setTimeout(() => {
+                setMessage("")
+                handleClose()
+              }, 3000);
+        }
+        // eslint-disable-next-line
+    }, [message])
+    
+    
     useEffect(() => {
         if (payload.image) {
             handleAddProduct()
-            setImage()
             setFeaturesArray([])
         }
         // eslint-disable-next-line
     }, [payload])
-    
+
+    useEffect(() => {
+      if (show) {
+        handleGetCategories()
+      }
+    }, [show])
     
 
     const addFeature = () => {
@@ -51,8 +68,8 @@ const handleSubmit = (e) => {
 
     const handleAddProduct = async() => {
         try {
-            console.log(payload)
-            await axios.post("/product/addProduct", payload)
+            const {data} = await axios.post("/product/addProduct", payload)
+            setMessage(data.message)
         } catch (error) {
             console.log(error)
         }
@@ -60,7 +77,19 @@ const handleSubmit = (e) => {
 
     const handleClose = () => {
         setShow(false)
+        setFeaturesArray([])
+        setImage()
     };
+
+    const handleGetCategories = async() => {
+        try {
+            const {data} = await axios("/category/getAllCategories")
+            setCategories(data.categories)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -83,9 +112,12 @@ const handleSubmit = (e) => {
                         <Form.Group className="mb-3" controlId="model">
                             <Form.Select aria-label="Floating label select example">
                                 <option>Seleccione una Categoría</option>
-                                <option value="64b58680f122d167152f247a">One</option>
-                                <option value="64b58680f122d167152f247a">Two</option>
-                                <option value="64b58680f122d167152f247a">Three</option>
+                                {
+                                    categories.length && 
+                                    categories.map((category)=>{
+                                        return <option key={category._id} value={category._id}>{category.name}</option>
+                                    })
+                                }
                             </Form.Select>
                         </Form.Group>
                         <div className='image_container'>
@@ -129,30 +161,37 @@ const handleSubmit = (e) => {
                         }
                         {
                             featuresArray &&
-                            <div className='feature_container'>
-                            <div>Caracteristica</div>
-                            <div className='featureDetail'>Detalle</div>
+                            <div className='titlesFeatures'>
+                                <Row>
+                                    <Col xs={4}>Caracteristica</Col>
+                                    <Col xs={8}>Detalle</Col>
+                                </Row>
                             </div>
                         }
                         {
                             featuresArray.map((feature)=> {
                                 return(
-                                    <div className='feature_container'>
-                                        <div>{feature.feature}:</div>
-                                        <div className='featureDetail'>{feature.detail}</div>
+                                    <div key={feature.feature}>
+                                        <Row>
+                                            <Col xs={4}>{feature.feature}:</Col>
+                                            <Col xs={8}>{feature.detail}</Col>
+                                        </Row>
                                     </div>
                                 )})
                         }
-                        <Form.Group className="mb-3" controlId="price">
-                            <Form.Label>Precio</Form.Label>
-                            <Form.Control type="number" placeholder="Ingrese el Precio de lista" />
+                        <Form.Group className="mb-3 mt-3    " controlId="price">
+                            <Row>
+                                <Col xs={3}><Form.Label>Precio</Form.Label></Col>
+                                <Col xs={9}><Form.Control type="number" placeholder="Ingrese el Precio de lista" /></Col>
+                            </Row>
                         </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
+                    {message && <Alert>{message}</Alert>}
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" type="submit" onClick={handleClose}>
+                    <Button variant="primary" type="submit">
                         Save Changes
                     </Button>
                 </Modal.Footer>
